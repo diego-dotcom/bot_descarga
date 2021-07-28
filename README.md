@@ -3,7 +3,7 @@
 ---
 #### Instrucciones:
 1. Si no lo tuviera instalado, descargue e instale Python 3.8.5 o superior, desde www.python.org/downloads. Durante la instalación asegúrese de agregar Python al PATH.
-2. Descargue los archivos bot.py y claves.xlsx del repositorio, y colóquelos en una misma carpeta.
+2. Descargue los archivos bot.py, claves.xlsx y requirements.txt del repositorio, y colóquelos en una misma carpeta.
 3. Descargue ChromeDriver (según la versión que tenga de Google Chrome) desde https://chromedriver.chromium.org/downloads, y coloque en la carpeta del punto anterior.
 4. Desde la línea de comandos, sitúese en la carpeta creada e instale las librerías requeridas con `pip install -r requirements.txt`
 5. Modifique el archivo claves.xlsx con las CUIT y claves de preferencia, una debajo de la otra. Guarde los cambios.

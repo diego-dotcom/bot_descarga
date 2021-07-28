@@ -1,8 +1,8 @@
-## Bot de descarga desde Mis Comprobantes
-### *A partir de una planilla de excel con CUIT y clave fiscal, descarga los comprobantes emitidos y recibidos del mes anterior, en formato XLS.*
+## Bot de descarga de comprobantes desde Mis Comprobantes (AFIP)
+### *A partir de una planilla de excel con una lista de CUIT y claves fiscales, descarga los comprobantes emitidos y recibidos del mes anterior de cada contribuyente, en formato XLS.*
 ---
 #### Instrucciones:
-1. Si no lo tuviera instalado, descargue e instale Python 3.8.5 o superior, desde www.python.org/downloads
+1. Si no lo tuviera instalado, descargue e instale Python 3.8.5 o superior, desde www.python.org/downloads. Durante la instalación asegúrese de agregar Python al PATH.
 2. Descargue los archivos bot.py y claves.xlsx del repositorio, y colóquelos en una misma carpeta.
 3. Descargue ChromeDriver (según la versión que tenga de Google Chrome) desde https://chromedriver.chromium.org/downloads, y coloque en la carpeta del punto anterior.
 4. Desde la línea de comandos, sitúese en la carpeta creada e instale las librerías requeridas con `pip install -r requirements.txt`

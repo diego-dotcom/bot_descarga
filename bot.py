@@ -43,12 +43,19 @@ for i in df.index:
 
     time.sleep(5)
 
+    # Click en Mis Servicios (para acceder al menú anterior de AFIP)
+
+    mis_servicios = driver.find_element_by_xpath ("//li[@title='Mis Servicios']")
+    mis_servicios.click()
+
+    time.sleep(5)
+
     # Click en Mis Comprobantes
     try:
         mis_comprobantes = driver.find_element_by_xpath ("//div[@title='mcmp']")
     except:
         mis_comprobantes = driver.find_element_by_link_text('Mis Comprobantes')
-    mis_comprobantes.click()
+        mis_comprobantes.click()
 
     
     time.sleep(8)

@@ -55,7 +55,7 @@ for i in df.index:
         mis_comprobantes = driver.find_element_by_xpath ("//div[@title='mcmp']")
     except:
         mis_comprobantes = driver.find_element_by_link_text('Mis Comprobantes')
-        mis_comprobantes.click()
+    mis_comprobantes.click()
 
     
     time.sleep(8)

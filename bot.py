@@ -19,7 +19,11 @@ for i in df.index:
     clave = str(df['clave'][i])
 
     # Comienza el programa abriendo el login en la web de AFIP
-    driver = webdriver.Chrome()
+    option = webdriver.ChromeOptions()
+    option.add_argument('--disable-blink-features=AutomationControlled')
+    option.add_experimental_option("excludeSwitches", ["enable-automation"])
+    option.add_experimental_option('useAutomationExtension', False)
+    driver = webdriver.Chrome(options=option)
     driver.maximize_window()
     url = "https://auth.afip.gob.ar/contribuyente_/login.xhtml"
     driver.get(url)
@@ -34,6 +38,7 @@ for i in df.index:
     boton_cuit.click()
 
     # Borra el campo clave e introduce la clave
+
     campo_clave = driver.find_element_by_id("F1:password")
     campo_clave.clear()
     campo_clave.send_keys(clave)
@@ -41,30 +46,39 @@ for i in df.index:
     boton_clave = driver.find_element_by_id("F1:btnIngresar")
     boton_clave.click()
 
-    time.sleep(5)
+    time.sleep(100)
 
     # Click en Mis Servicios (para acceder al menú anterior de AFIP)
 
     mis_servicios = driver.find_element_by_xpath ("//li[@title='Mis Servicios']")
     mis_servicios.click()
 
-    time.sleep(5)
+    time.sleep(3)
 
+    
     # Click en Mis Comprobantes
     try:
         mis_comprobantes = driver.find_element_by_xpath ("//div[@title='mcmp']")
     except:
         mis_comprobantes = driver.find_element_by_link_text('Mis Comprobantes')
     mis_comprobantes.click()
-
     
-    time.sleep(8)
+    time.sleep(3)
 
     driver.switch_to.window(driver.window_handles[1])
 
-    # Descarga los comprobantes emitidos del mes anterior
-    driver.find_element_by_id("btnEmitidos").click()
+    # Hace click en el contribuyente principal (si existe esa página), sino no hace nada
 
+    try:
+        driver.find_element_by_xpath("/html/body/form/main/div/div/div[2]/div/a").click()
+        time.sleep(2)
+
+    except:
+        pass
+    
+    # Descarga los comprobantes emitidos del mes anterior
+
+    driver.find_element_by_id("btnEmitidos").click()
     driver.find_element_by_id("fechaEmision").click()
     driver.find_element_by_css_selector("body > div > div.ranges > ul > li:nth-child(6)").click()
     driver.find_element_by_id("buscarComprobantes").click()

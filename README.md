@@ -12,4 +12,5 @@
 
 > El bot aún no resuelve cuando AFIP solicita cambio de clave.
 > Dado ese caso u otro error que pudiera surgir, elimine las filas de CUIT / clave que correspondan y vuelva a correr el programa.
+> El desarrollo del bot responde solo a fines educativos. El desarrollador del mismo deslinda toda responsabilidad por los daños y/o perjuicios que pudiere ocasionar su utilización, como así tampoco se hace responsable sobre el uso que puedan hacer terceros con la información brindada.
 

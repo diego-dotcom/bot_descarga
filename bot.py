@@ -4,6 +4,8 @@
 import pandas
 import time
 from selenium import webdriver
+import random
+
 #from selenium.webdriver.common.keys import Keys  
 #from selenium.webdriver.common.by import By
 #from selenium.webdriver.support.ui import WebDriverWait
@@ -46,14 +48,15 @@ for i in df.index:
     boton_clave = driver.find_element_by_id("F1:btnIngresar")
     boton_clave.click()
 
-    time.sleep(100)
+    driver.implicitly_wait(8)
 
     # Click en Mis Servicios (para acceder al menú anterior de AFIP)
 
     mis_servicios = driver.find_element_by_xpath ("//li[@title='Mis Servicios']")
     mis_servicios.click()
 
-    time.sleep(3)
+    driver.implicitly_wait(8)
+
 
     
     # Click en Mis Comprobantes
@@ -63,7 +66,8 @@ for i in df.index:
         mis_comprobantes = driver.find_element_by_link_text('Mis Comprobantes')
     mis_comprobantes.click()
     
-    time.sleep(3)
+    time.sleep(2)
+
 
     driver.switch_to.window(driver.window_handles[1])
 
@@ -71,7 +75,7 @@ for i in df.index:
 
     try:
         driver.find_element_by_xpath("/html/body/form/main/div/div/div[2]/div/a").click()
-        time.sleep(2)
+        time.sleep(random.randint(1,3))
 
     except:
         pass
@@ -82,21 +86,23 @@ for i in df.index:
     driver.find_element_by_id("fechaEmision").click()
     driver.find_element_by_css_selector("body > div > div.ranges > ul > li:nth-child(6)").click()
     driver.find_element_by_id("buscarComprobantes").click()
-    time.sleep(8)
+    driver.implicitly_wait(8)
+
     driver.find_element_by_xpath("//button[@class='btn btn-default buttons-excel buttons-html5 btn-defaut btn-sm sinborde']").click()
 
     driver.find_element_by_xpath("//a[@href='menuPrincipal.do']").click()
     driver.switch_to.window(driver.window_handles[1])
-    time.sleep(2)
+    time.sleep(random.randint(1,3))
+
 
     # Descarga los comprobantes recibidos del mes anterior
     driver.find_element_by_id("btnRecibidos").click()
     driver.find_element_by_id("fechaEmision").click()
     driver.find_element_by_css_selector("body > div > div.ranges > ul > li:nth-child(6)").click()
     driver.find_element_by_id("buscarComprobantes").click()
-    time.sleep(8)
+    driver.implicitly_wait(8)
     driver.find_element_by_xpath("//button[@class='btn btn-default buttons-excel buttons-html5 btn-defaut btn-sm sinborde']").click()
-
+    time.sleep(2)
 
     #Sale de Mis Comprobantes
     driver.find_element_by_xpath("//a[@title='Salir...']").click()

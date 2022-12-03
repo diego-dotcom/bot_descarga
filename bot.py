@@ -1,5 +1,6 @@
 # BOT de descarga desde Mis Comprobantes - AFIP
-# Creado por Diego Mendizábal
+# Desarrollado y mantenido por Diego Mendizábal
+# El desarrollador no se hace responsable por las sanciones que puedan derivar de la utilización del mismo
 
 import pandas
 import time
@@ -15,6 +16,8 @@ excel_claves = r'.\claves.xlsx'
 
 df = pandas.read_excel(excel_claves, engine = 'openpyxl')
 
+
+# Se recorre cada fila de la planilla de cálculo
 
 for i in df.index:
     cuit = int(df['cuit'][i])
@@ -39,6 +42,7 @@ for i in df.index:
     boton_cuit = driver.find_element_by_id("F1:btnSiguiente")
     boton_cuit.click()
 
+
     # Borra el campo clave e introduce la clave
 
     campo_clave = driver.find_element_by_id("F1:password")
@@ -50,26 +54,25 @@ for i in df.index:
 
     driver.implicitly_wait(8)
 
+
     # Click en Mis Servicios (para acceder al menú anterior de AFIP)
 
-    mis_servicios = driver.find_element_by_xpath ("//li[@title='Mis Servicios']")
-    mis_servicios.click()
+    #mis_servicios = driver.find_element_by_link_text('Ver todos')
+    #mis_servicios.click()
+    #driver.implicitly_wait(8)
 
-    driver.implicitly_wait(8)
 
+    # Busca el servicio Mis Comprobantes y hace click
 
-    
-    # Click en Mis Comprobantes
-    try:
-        mis_comprobantes = driver.find_element_by_xpath ("//div[@title='mcmp']")
-    except:
-        mis_comprobantes = driver.find_element_by_link_text('Mis Comprobantes')
+    buscador = driver.find_element_by_id('buscadorInput')
+    buscador.send_keys('Mis Comprobantes')
+    mis_comprobantes = driver.find_element_by_class_name('search-item')
     mis_comprobantes.click()
     
     time.sleep(2)
 
-
     driver.switch_to.window(driver.window_handles[1])
+
 
     # Hace click en el contribuyente principal (si existe esa página), sino no hace nada
 
@@ -80,6 +83,7 @@ for i in df.index:
     except:
         pass
     
+
     # Descarga los comprobantes emitidos del mes anterior
 
     driver.find_element_by_id("btnEmitidos").click()
@@ -96,6 +100,7 @@ for i in df.index:
 
 
     # Descarga los comprobantes recibidos del mes anterior
+
     driver.find_element_by_id("btnRecibidos").click()
     driver.find_element_by_id("fechaEmision").click()
     driver.find_element_by_css_selector("body > div > div.ranges > ul > li:nth-child(6)").click()
@@ -103,6 +108,7 @@ for i in df.index:
     driver.implicitly_wait(8)
     driver.find_element_by_xpath("//button[@class='btn btn-default buttons-excel buttons-html5 btn-defaut btn-sm sinborde']").click()
     time.sleep(2)
+
 
     #Sale de Mis Comprobantes
     driver.find_element_by_xpath("//a[@title='Salir...']").click()
@@ -114,11 +120,10 @@ for i in df.index:
 
     driver.switch_to.window(driver.window_handles[0])
 
+
     #Se desloguea
-    try:
-        driver.find_element_by_xpath("//a[@title='Salir']").click()
-    except:
-        driver.find_element_by_xpath('//*[@id="cssmenu"]/ul/li[3]/a')
+    driver.find_element_by_id('contenedorContribuyente').click()
+    driver.find_element_by_xpath('//button[@title="Salir"]')
 
     driver.close()
 
